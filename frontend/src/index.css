@@ -1,0 +1,33 @@
+:root {
+  --text: #1c2430;
+  --muted: #3d4a5c;
+  --bg: #f3f5f8;
+  --card: #ffffff;
+  --border: #c5ced8;
+  --accent: #1d4e89;
+  --accent-hover: #163e6e;
+  --danger: #8c1d18;
+  --danger-bg: #fdecea;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
