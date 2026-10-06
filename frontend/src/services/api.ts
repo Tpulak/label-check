@@ -3,7 +3,9 @@ import type {
   VerificationResult,
 } from "../types/verification"
 
-const API_BASE = "http://127.0.0.1:8000"
+// Empty on purpose. Locally, Vite forwards this to the backend.
+// When the site is deployed, the page and the backend share one address.
+const API_BASE = ""
 
 type ServerField = {
   label: string
