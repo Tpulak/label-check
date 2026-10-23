@@ -1,5 +1,7 @@
 # LabelCheck
 
+https://label-check-d8vm.onrender.com/
+
 LabelCheck compares an alcohol-label photo with the fields from an application. It is a standalone prototype. It does not connect to COLA, and it does not save photos.
 
 You can check one label, or a spreadsheet of labels with matching photos. Each field comes back as **Match**, **Mismatch**, or **Needs review**.
@@ -77,11 +79,4 @@ A batch is a spreadsheet with one row per label, plus the photo files. The filen
 - Alcohol-content exceptions for some wine and beer labels are not modeled. Country of origin is out of scope.
 - Local OCR is used so a label can be checked in about a few seconds without calling a cloud service. Clear printed labels read reliably. Poor photos, glare, and unusual layouts often do not, and those results should be treated as uncertain.
 
-## Deploy
 
-The `Dockerfile` builds the website and the label reader together, including Tesseract. [Render](https://render.com) can run that file.
-
-1. Push this project to GitHub.
-2. In Render, choose **New** → **Web Service** and connect the repository.
-3. Leave the environment as **Docker**. Set the health check path to `/health`.
-4. Deploy. Render prints a public URL. The free service sleeps when it is idle, so the first open after that can take about a minute.
