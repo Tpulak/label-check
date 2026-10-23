@@ -1,6 +1,8 @@
 # LabelCheck
 
-https://label-check-d8vm.onrender.com/
+Live demo: https://label-check-d8vm.onrender.com/
+
+The free host sleeps when nobody is using it, so the first open can take about a minute.
 
 LabelCheck compares an alcohol-label photo with the fields from an application. It is a standalone prototype. It does not connect to COLA, and it does not save photos.
 
@@ -45,13 +47,33 @@ Open http://localhost:5173/. The page talks to the backend at http://127.0.0.1:8
 
 If the backend says it cannot use port 8000, one copy is already running. Use that one instead of starting a second.
 
-Optional checks, from the `backend` folder:
+Optional automated checks, from the `backend` folder:
 
 ```powershell
 .\.venv\Scripts\python -m pytest
 ```
 
-Sample labels and a matching spreadsheet are in `test-data`. The warning headings on those samples are regular type, not bold, so the government-warning field is a mismatch.
+## How to test
+
+Use the live demo above, or a local copy at http://localhost:5173/. Sample photos and a matching spreadsheet are in `test-data`.
+
+### One label
+
+1. Click **Check one label**.
+2. Upload an alcohol-label photo, or one of the PNG files in `test-data` (`valid-label.png`, `harbor-light-gin.png`, `red-cedar-wine.png`, or `north-pier-ale.png`).
+3. Type that label’s row from `test-data/applications.csv` into the application fields. For `valid-label.png`, use brand `OLD TOM DISTILLERY`, class `Kentucky Straight Bourbon Whiskey`, alcohol `45%`, net contents `750 mL`, and producer `Old Tom Distillery, Louisville, KY`.
+4. Click **Verify label**.
+
+The government warning is not typed. It is shown on the form because every label is checked against that fixed text.
+
+### Many labels
+
+1. Click **Check many labels**.
+2. Upload a spreadsheet with one row per label. `test-data/applications.csv` is a ready-made example. The columns are `filename`, `brand_name`, `class_type`, `alcohol_content`, `net_contents`, and `producer`.
+3. Upload the label photos. Each photo’s file name must match the `filename` cell for that row, including the `.png`.
+4. Click **Check these labels**. Open a finished row to see the field-by-field result.
+
+On these sample labels the other fields should match, but the government warning is a mismatch. The headings are regular type, and the rule requires `GOVERNMENT WARNING` in bold.
 
 ## Approach
 
@@ -78,5 +100,3 @@ A batch is a spreadsheet with one row per label, plus the photo files. The filen
 - The government warning is required on every alcohol label and is not typed in. It must match the official Surgeon General wording, the heading must be `GOVERNMENT WARNING` in all capitals, and that heading must be bold. If the photo does not show whether the heading is bold, the field needs review.
 - Alcohol-content exceptions for some wine and beer labels are not modeled. Country of origin is out of scope.
 - Local OCR is used so a label can be checked in about a few seconds without calling a cloud service. Clear printed labels read reliably. Poor photos, glare, and unusual layouts often do not, and those results should be treated as uncertain.
-
-
